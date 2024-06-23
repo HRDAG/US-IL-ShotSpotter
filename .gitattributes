@@ -1,5 +1,6 @@
 *.csv.* filter=lfs diff=lfs merge=lfs -text
 *.parquet filter=lfs diff=lfs merge=lfs -text
 *output/* filter=lfs diff=lfs merge=lfs -text
+data/import/input/EmergencyCallTimes.csv.gz filter=lfs diff=lfs merge=lfs -text
 data/import/input/.* filter=lfs diff=lfs merge=lfs -text
 data/import/input/* filter=lfs diff=lfs merge=lfs -text
