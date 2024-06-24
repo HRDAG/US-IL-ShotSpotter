@@ -9,10 +9,9 @@ surveil:
     - POD MISSION
 
 help:
-    gun:
+    gunshot:
     - SHOTS FIRED
     - PERSON SHOT
-    - PERSON WITH A GUN
     mp:
     - CHILD ABDUCTION
     - MISSING PER. TENDER AGE
@@ -25,6 +24,7 @@ help:
     - BATTERY
     - ASSAULT
     noinjury_report:
+    - PERSON WITH A GUN
     - PERSON CALLING FOR HELP
     - ASSIST CITIZEN
     - CHILD LEFT ALONE
