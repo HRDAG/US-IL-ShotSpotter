@@ -153,7 +153,6 @@ if __name__ == '__main__':
     for propcol in propcols:
         perccol = propcol.replace('prop_', 'perc_')
         both[perccol] = both[propcol].apply(lambda x: f"{x*100:.2f}%")
-    perccols = [col for col in both.columns if 'perc_' in col]
 
     logger.info("writing keyword results data")
     both.to_parquet(args.output)

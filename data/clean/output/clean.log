@@ -1,11 +1,11 @@
-2024-06-23 15:05:26 - INFO - loading data
-2024-06-23 15:05:30 - INFO - loaded 13,337,638 rows
-2024-06-23 15:05:31 - INFO - formatting basic event info fields
-2024-06-23 15:05:40 - INFO - formatting `call_date` as DateTime (takes a couple minutes)
-2024-06-23 15:06:29 - INFO - formatting `disp_date` as DateTime (takes a couple minutes)
-2024-06-23 15:07:17 - INFO - formatting `on_date` as DateTime (takes a couple minutes)
-2024-06-23 15:08:04 - INFO - formatting `clear_date` as DateTime (takes a couple minutes)
-2024-06-23 15:08:51 - INFO - formatting `close_date` as DateTime (takes a couple minutes)
-2024-06-23 15:09:40 - INFO - adding supplementary datetime columns
-2024-06-23 15:10:59 - INFO - writing data
-2024-06-23 15:11:05 - INFO - done.
+2024-06-23 17:18:00 - INFO - loading data
+2024-06-23 17:18:05 - INFO - loaded 13,337,638 rows
+2024-06-23 17:18:05 - INFO - formatting basic event info fields
+2024-06-23 17:18:15 - INFO - formatting `call_date` as DateTime (takes a couple minutes)
+2024-06-23 17:19:04 - INFO - formatting `disp_date` as DateTime (takes a couple minutes)
+2024-06-23 17:19:52 - INFO - formatting `on_date` as DateTime (takes a couple minutes)
+2024-06-23 17:20:38 - INFO - formatting `clear_date` as DateTime (takes a couple minutes)
+2024-06-23 17:21:26 - INFO - formatting `close_date` as DateTime (takes a couple minutes)
+2024-06-23 17:22:14 - INFO - adding supplementary datetime columns
+2024-06-23 17:23:32 - INFO - writing data
+2024-06-23 17:23:39 - INFO - done.
