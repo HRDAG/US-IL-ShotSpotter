@@ -58,7 +58,6 @@ def readyaml(fname):
     return data
 
 
-# support methods
 def get_condinfo(df, patt):
     """
     Computes several descriptive statistics using `df` records where `patt` appears in `init_type`. \n
