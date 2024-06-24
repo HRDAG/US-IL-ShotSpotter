@@ -63,8 +63,10 @@ def add_surveilindicators(df, surveil_res):
     surveil_re =[re.escape(x) for v in surveil_res.values() for x in v]
     surveil_re = "|".join(surveil_re)
     copy['surveil'] = copy.init_type.str.contains(surveil_re, na=False, flags=re.I)
-    shotspotter_re = "|".join(re.escape(v) for v in surveil_res['shotspotter'])
-    copy['shotspotter'] = copy.init_type.str.contains(shotspotter_re, na=False, flags=re.I)
+    for surveil_key in surveil_res.keys():
+        logger.info(f'Adding indicator for {surveil_key} pattern(s)')
+        patt = "|".join(re.escape(v) for v in surveil_res[surveil_key])
+        copy[surveil_key] = copy.init_type.str.contains(patt, na=False, flags=re.I)
     return copy
 
 
@@ -74,8 +76,9 @@ def add_helpindicators(df, help_res):
     help_re = "|".join(help_re)
     copy['help'] = copy.init_type.str.contains(help_re, na=False, flags=re.I)
     for help_key in help_res.keys():
+        logger.info(f'Adding indicator for {help_key} pattern(s)')
         patt = "|".join(re.escape(v) for v in help_res[help_key])
-    copy[help_key] = copy.init_type.str.contains(patt, na=False, flags=re.I)
+        copy[help_key] = copy.init_type.str.contains(patt, na=False, flags=re.I)
     return copy
 
 
