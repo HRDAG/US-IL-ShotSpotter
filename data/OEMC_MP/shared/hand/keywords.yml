@@ -1,0 +1,40 @@
+surveil:
+    shotspotter:
+    - SHOT SPOTTER
+    hunchlab:
+    - HUNCHLAB
+    licplate:
+    - LIC PLT READER ARMED DANGEROUS
+    pod:
+    - POD MISSION
+
+help:
+    gunshot:
+    - SHOTS FIRED
+    - PERSON SHOT
+    mp:
+    - CHILD ABDUCTION
+    - MISSING PER. TENDER AGE
+    - MISSING PERSON
+    injury_report:
+    - PERSON DOWN
+    - INJURED PERSON REPORT
+    - CHILD ABUSE
+    - DOMESTIC BATTERY
+    - BATTERY
+    - ASSAULT
+    noinjury_report:
+    - PERSON WITH A GUN
+    - PERSON CALLING FOR HELP
+    - ASSIST CITIZEN
+    - CHILD LEFT ALONE
+    - VIOLATION ORDER OF PROT
+    - DOMESTIC DISTURBANCE
+
+supp:
+    shotspotter_reclass:
+    - FIREWORKS
+    - INFO. FOR THE POLICE
+    - SUSPECTED 911 MISUSE
+    - AUTO
+    - GENERIC (CHANGE PRIORITY)
