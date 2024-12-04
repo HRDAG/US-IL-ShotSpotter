@@ -1,0 +1,62 @@
+surveil:
+    shotspotter:
+    - SHOT SPOTTER
+    hunchlab:
+    - HUNCHLAB
+    licplate:
+    - LIC PLT READER ARMED DANGEROUS
+    pod:
+    - POD MISSION
+    general: # is this fair? captures a broad range of `init_type`s but it stands out to me
+    - INFO. FOR THE POLICE
+    - MISSION # depending on what this means in practice, might not really be surveillance?
+    - SPECIAL ATTENTION
+    traffic:
+    - TRAFFIC STOP (OV)
+    - PARKING VIOL. 1
+    - PARKING VIOL. 2
+    patrol:
+    - ALARM COMMERCIAL # ALARM BURGLAR is treated as a no_injury request for help...
+    - Community Interaction
+    - CRIMINAL TRESPASS IP
+    - DETAIL
+    - DISTURBANCE - MUSIC/NOISE
+    - FOOT PATROL (OV)
+    - PARK CHECK [OV]
+    - PREMISE CHECK [OV]
+    - SUSPICIOUS AUTO NO OCC.
+    - SUSPICIOUS PERSON
+    - STREET STOP
+
+help: # is this group meant as individuals asking for help? or like topic groups related to persons in danger?
+    gun:
+    - SHOTS FIRED
+    - PERSON SHOT
+    mp:
+    - CHILD ABDUCTION
+    - MISSING PER. TENDER AGE
+    - MISSING PERSON
+    injury_report:
+    - PERSON DOWN
+    - INJURED PERSON REPORT
+    - CHILD ABUSE
+    - DOMESTIC BATTERY
+    - BATTERY
+    - ASSAULT
+    - EMS # the rest of these are all/mostly CPD calls
+    noinjury_report: # no explicitly stated injury, but injury could be unknown to caller / imminent / other factor
+    - PERSON WITH A GUN
+    - PERSON CALLING FOR HELP
+    - ASSIST CITIZEN
+    - CHILD LEFT ALONE
+    - CHECK WELL BEING # fair?
+    - VIOLATION ORDER OF PROT
+    - MENTAL HEALTH DISTURBANCE
+    - DOMESTIC DISTURBANCE # I don't include DISTURBANCE alone bc it covers noise violations and neighborly disputes, but could add
+    - ALARM BURGLAR # fair?
+    - THEFT REPORT
+    - AUTO ACCIDENT PD # what's the difference between the PD and PI versions?
+    - AUTO ACCIDENT PI
+    - RECKLESS DRIVING
+
+# done.
