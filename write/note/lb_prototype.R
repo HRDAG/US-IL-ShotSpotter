@@ -11,19 +11,30 @@ sub_df <- df[,c('event_no', 'district', 'numeric_district',
                 'time_to_dispatch', 'ttd_group', 
                 'init_priority', 'init_type', 'fin_type',
                 'event_group', 'event_type')]
+
+# Converts all variables in district column into a categorical variable 
 sub_df$district <- as.factor(sub_df$district)
+
+# Creates contingency table
 contingencyTable <- table(sub_df$district, sub_df$dispatch_reported)
+
+# Chisq test 
 test_results <- chisq.test(contingencyTable)
+
+# Vector of expected Counts per cell
 expectedCounts <- test_results$expected
-all(expectedCounts >= 5) # Test that all expectedCounts are >=5 
 
-cat("Groups with expected counts < 5:\n")
-print(low_expected)
+# Test that all expectedCounts are >=5 
+all(expectedCounts >= 5) 
 
-# Identify which groups (rows) have any expected counts under 5
+
+# Identify which distract (rows) have any expected counts under 5
 groupslt5 <- rownames(expectedCounts)[apply(expectedCounts, 
                                             1, 
                                             FUN = function(x) any(x<5))]
+# Displays a vector of all distracts with expected count < 5
+cat("Districts with expected counts < 5:\n")
+print(groupslt5)
 
 if (length(groupslt5) > 0) {
   # Create a new grouping variable (as a character then factor)
