@@ -49,7 +49,7 @@ def format_datetime_full(x):
 def readxl(fname):
     assert 'fixed' in fname, f"\
     The original CSV contains an error where some comma-separated values are not read correctly. Use the frozen/fixed version of the csv, not {fname}."
-    raw = pd.read_csv(fname, header=0)
+    raw = pd.read_csv(fname, header=0, dtype={'District': str})
     rules = {
         'EventNumber': 'event_no',
         'EntryDate': 'entry_date',
@@ -62,8 +62,8 @@ def readxl(fname):
         'FinalType': 'fin_type',
         'FinTypeDescription': 'fin_type_desc',
         'District': 'district_oemc',
-        'Location': 'location_ofcall', # not sure about that
-        'ServiceLocation': 'location',
+        'Location': 'call_block_address', # not sure about that
+        'ServiceLocation': 'service_block_address',
         'XCoord': 'location_x',
         'YCoord': 'location_y',
     }
