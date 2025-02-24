@@ -41,7 +41,7 @@ def getlogger(sname, file_name=None):
 
 
 def readxl(fname):
-    raw = pd.read_excel(fname)
+    raw = pd.read_csv(fname, dtype={'District': str})
     rules = {
         'EventNumber': 'event_no',
         'EntryDate': 'entry_date',
@@ -52,10 +52,11 @@ def readxl(fname):
         'FinPriority': 'fin_priority',
         'InitType': 'init_type',
         'FinalType': 'fin_type',
+        'FinalDisposition': 'final_disposition_code',
         'FinTypeDescription': 'fin_type_desc',
         'District': 'district_oemc',
-        'Location': 'location_ofcall', # not sure about that
-        'ServiceLocation': 'location',
+        'Location': 'call_block_address', # not sure about that
+        'ServiceLocation': 'service_block_address',
         'XCoord': 'location_x',
         'YCoord': 'location_y',
     }

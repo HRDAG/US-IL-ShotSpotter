@@ -5,7 +5,7 @@
 # Copyright:   2025, HRDAG, GPL v2 or later
 # =========================================
 
-input := frozen/cpd_foia251329.xlsx
+input := frozen/cpd_foia251329.csv
 output := output/oemc_sst.parquet
 
 .PHONY: all clean
