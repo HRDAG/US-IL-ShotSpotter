@@ -55,7 +55,7 @@ def readxl(fname):
         'Final Disposition Code': 'final_disposition_code',
         'Final Type': 'fin_type',
         'Initial Type': 'init_type',
-        'Location Block Address': 'location_block_address',
+        'Location Block Address': 'call_block_address',
         'On Scene Date': 'date_onscene',
         'RD Number': 'rd',
         'Response Area': 'response_area',
