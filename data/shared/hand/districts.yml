@@ -1,0 +1,31 @@
+061: (This police unit is no longer in existence per OPS Command)
+070: (This police unit is no longer in existence per OPS Command)
+177: Forensics Unit
+377: Evidence Technicians (Formerly 377, Now Unit 277)
+4100: Address that is out of the state (non-Illinois address)
+477: Evidence Technicians (Formerly 477, Now Unit 277)
+ARP: Alternate Response Program
+ARS: Alternate Response Section
+# this is what I can find about the 'citywide' boundaries: https://www.chicagopolicescanner.com/p/cpd.html
+CW1: Citywide 1
+CW2: Citywide 2
+CW3: Citywide 3
+CW4: Citywide 4
+CW5: Citywide 5
+CW6: Citywide 6
+CW7: Citywide 7
+F02: Fire 02?
+F09: Fire 09?
+FD: Front Desk
+HD: Hot Desk
+OC: Operations Center
+OEM: Office of Emergency Management
+ORD: Ohare Airport
+PFDM: Police Fire Dispatcher Messaging
+PHN: Phone
+PPAG: Police Page
+PT: Point to Point
+SST: Streets and Sanitation (Formerly Shot Spotter)
+TST: Test
+
+# done.
