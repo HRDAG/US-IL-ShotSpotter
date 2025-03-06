@@ -4,3 +4,4 @@
 dev*.ipynb
 *meme*
 .parquet
+.log
