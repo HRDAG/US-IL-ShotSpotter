@@ -66,7 +66,7 @@ if __name__ == '__main__':
         events.date_occurred <= pd.Timestamp('2024-11-05')) & (
         events.event_type.isin(('ShotSpotter alert', 'Human reporting gunfire'))
         )].drop_duplicates()
-    data.to_parquet(args.output)
+    data.drop(columns=['fin_type_desc']).to_parquet(args.output)
 
     logger.info('done')
 # }}}
