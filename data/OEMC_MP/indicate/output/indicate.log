@@ -11,3 +11,16 @@
 2024-06-23 21:53:50 - INFO - Adding indicator for noinjury_report pattern(s)
 2024-06-23 21:54:01 - INFO - writing supplemented OEMC data
 2024-06-23 21:54:08 - INFO - done.
+2025-03-11 16:46:22 - INFO - loading data
+2025-03-11 16:46:26 - INFO - loaded 13,337,638 rows
+2025-03-11 16:46:26 - INFO - loaded 3 keyword/phrase groups to search for in the data
+2025-03-11 16:46:34 - INFO - Adding indicator for shotspotter pattern(s)
+2025-03-11 16:46:37 - INFO - Adding indicator for hunchlab pattern(s)
+2025-03-11 16:46:40 - INFO - Adding indicator for licplate pattern(s)
+2025-03-11 16:46:41 - INFO - Adding indicator for pod pattern(s)
+2025-03-11 16:47:02 - INFO - Adding indicator for gunshot pattern(s)
+2025-03-11 16:47:06 - INFO - Adding indicator for mp pattern(s)
+2025-03-11 16:47:10 - INFO - Adding indicator for injury_report pattern(s)
+2025-03-11 16:47:18 - INFO - Adding indicator for noinjury_report pattern(s)
+2025-03-11 16:47:29 - INFO - writing supplemented OEMC data
+2025-03-11 16:47:37 - INFO - done.

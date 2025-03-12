@@ -9,3 +9,14 @@
 2024-06-23 17:22:14 - INFO - adding supplementary datetime columns
 2024-06-23 17:23:32 - INFO - writing data
 2024-06-23 17:23:39 - INFO - done.
+2025-03-11 16:40:29 - INFO - loading data
+2025-03-11 16:40:33 - INFO - loaded 13,337,638 rows
+2025-03-11 16:40:33 - INFO - formatting basic event info fields
+2025-03-11 16:40:43 - INFO - formatting `call_date` as DateTime (takes a couple minutes)
+2025-03-11 16:41:34 - INFO - formatting `disp_date` as DateTime (takes a couple minutes)
+2025-03-11 16:42:26 - INFO - formatting `on_date` as DateTime (takes a couple minutes)
+2025-03-11 16:43:16 - INFO - formatting `clear_date` as DateTime (takes a couple minutes)
+2025-03-11 16:44:06 - INFO - formatting `close_date` as DateTime (takes a couple minutes)
+2025-03-11 16:44:57 - INFO - adding supplementary datetime columns
+2025-03-11 16:46:14 - INFO - writing data
+2025-03-11 16:46:21 - INFO - done.
