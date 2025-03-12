@@ -56,7 +56,13 @@ if __name__ == '__main__':
     ])
 
     # fill in event_type description data
-    eventdescs = {row[0]: row[1] for row in events[['fin_type', 'fin_type_desc',]].drop_duplicates().values}
+    eventdescs = {}
+    for row in events[['fin_type', 'fin_type_desc',]].drop_duplicates().values:
+        fintype = row[0]
+        typedesc = row[1]
+        if fintype not in eventdescs.keys(): eventdescs[fintype] = {typedesc}
+        else: eventdescs[fintype].add(typedesc)
+    for fintype, desclist in eventdescs.items(): eventdescs[fintype] = "|".join(sorted(eventdescs[fintype]))
     events['event_type_init'] = events.init_type.apply(lambda x: eventdescs[x] if x in eventdescs else None)
     events['event_type_fin'] = events.fin_type.apply(lambda x: eventdescs[x] if x in eventdescs else None)
     events['early_warning'] = (events.init_type == 'PERGUN') & (events.fin_type.isin(('PERSHO', 'SHOTSF')))
