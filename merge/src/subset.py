@@ -70,7 +70,7 @@ if __name__ == '__main__':
     # subset the data to the appropriate time period and types of events
     data = events.loc[(
         events.date_occurred >= pd.Timestamp('2021-01-01')) & (
-        events.date_occurred <= pd.Timestamp('2024-11-05')) & (
+        events.date_occurred <= pd.Timestamp('2024-09-23')) & (
         events.event_type.isin(('ShotSpotter alert', 'Human reporting gunfire'))
         )].drop_duplicates()
     assert 'area' in data.columns
