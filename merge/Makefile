@@ -9,32 +9,16 @@ oemc_gunfire := ../data/export/output/oemc_gunfire.parquet
 oemc_sst := ../data/export/output/oemc_sst.parquet
 cpd_sst := ../data/export/output/cpd_sst.parquet
 merged := output/merged.parquet
-subset := output/subset.parquet
-located := output/locations.parquet
-candidates := output/data.parquet
+events := output/events.parquet
 
 .PHONY: all clean
 
-all: $(subset)
+all: $(events)
 
 clean:
 	-rm -rf output/*
 
-$(candidates):\
-	src/find_candidates.py\
-	$(subset)
-	python $< \
-		--input=$(subset)\
-		--output=$@
-
-$(located):\
-	src/locate.py\
-	$(subset)
-	python $< \
-		--input=$(subset)\
-		--output=$@
-
-$(subset):\
+$(events):\
 	src/subset.py\
 	$(merged)
 	python $< \
