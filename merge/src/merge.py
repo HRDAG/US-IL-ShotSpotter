@@ -17,11 +17,11 @@ import pandas as pd
 
 # [Source](https://www.cbsnews.com/chicago/news/chicago-police-department-detective-areas-divisions-boundaries/)
 mapper = {
-    1: [2, 3, 7, 8, 9],
-    2: [4, 5, 6, 22],
-    3: [1, 12, 18, 19, 20, 24],
-    4: [10, 11, 15],
-    5: [14, 16, 17, 25]
+    '1': ['2', '3', '7', '8', '9'],
+    '2': ['4', '5', '6', '22'],
+    '3': ['1', '12', '18', '19', '20', '24'],
+    '4': ['10', '11', '15'],
+    '5': ['14', '16', '17', '25']
 }
 
 # --- support methods --- {{{
@@ -60,18 +60,18 @@ def verifylocations(df):
     return rawprop >= .8 <= subsetprop
 
 
-def reduce(xs):
-    if xs.isna().all(): return None
-    found = {v for v in xs if pd.notna(v)}
-    return found.pop()
-
-
 def format_district(v):
     if pd.isna(v): return None
     clean = v.replace('00', '')
     if clean[0] == '0': clean = clean[1:]
-    if not clean.isdigit(): return np.nan
-    return int(clean.strip())
+    if not clean.isdigit(): return 'Not a police district'
+    return str(int(clean.strip()))
+
+
+def reduce(xs):
+    if xs.isna().all(): return None
+    found = {v for v in xs if pd.notna(v)}
+    return found.pop()
 
 
 def reduce_df(df, idcols):
@@ -79,8 +79,7 @@ def reduce_df(df, idcols):
     copy['district_raw'] = copy[['district_oemc', 'district_cpd']].apply(
         lambda x: x.district_oemc if pd.notna(x.district_oemc) else x.district_cpd, axis=1)
     copy['district'] = copy.district_raw.apply(format_district)
-    for area, distlist in mapper.items():
-        copy.loc[copy.district.isin(distlist), 'area'] = area
+    for area, distlist in mapper.items(): copy.loc[copy.district.isin(distlist), 'area'] = area
     return copy.groupby(idcols).agg({
         'date_occurred': lambda xs: reduce(xs),
         'date_dispatched': lambda xs: reduce(xs),
@@ -125,6 +124,7 @@ if __name__ == '__main__':
     less = reduce_df(df=less, idcols=['event_no',])
     assert not less.event_no.duplicated().any()
     assert 'area' in less.columns
+    assert less.area.notna().any()
     less.to_parquet(args.output)
 
     logger.info('done')
