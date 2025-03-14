@@ -111,6 +111,7 @@ if __name__ == '__main__':
         'district_oemc', 'district_cpd',
         'location', 'location_x', 'location_y',
         'fin_type', 'fin_type_desc', 'disposition',
+        'labeled_duplicate',
     ]
     oemc_gunfire = pd.read_parquet(args.oemc_gunfire).rename(columns=renamer)
     oemc_sst = pd.read_parquet(args.oemc_sst).rename(columns=renamer)
