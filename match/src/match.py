@@ -14,6 +14,7 @@ import logging
 import yaml
 from datetime import timedelta
 import pandas as pd
+import networkx as nx
 #}}}
 
 # --- support methods --- {{{
@@ -57,9 +58,9 @@ def format_locclusters(clusters):
             copy = cluster.copy()
             copy.remove(ea)
             if copy == set(): row = {"location": ea, "similar_locations": None}
-            else: row = {"location": ea, "similar_locations": " | ".join(copy)}
+            else: row = {"location": ea, "similar_locations": copy}
             data.append(row)
-    out = pd.DataFrame(data).drop_duplicates().dropna(subset=['similar_locations']).reset_index(drop=True)
+    out = pd.DataFrame(data).explode('similar_locations').drop_duplicates().dropna(subset=['similar_locations']).reset_index(drop=True)
     return out
 
 
@@ -67,35 +68,22 @@ def format_eventclusters(clusters):
     data = []
     for cluster in clusters:
         for ea in cluster:
-            copy = cluster.copy()
-            copy.remove(ea)
-            if copy == set(): row = {"event_no": ea, "candidate_events": None}
-            else: row = {"event_no": ea, "candidate_events": " | ".join(copy)}
+            row = {'event_no': ea, 'cluster': '|'.join(sorted(cluster))}
             data.append(row)
-    out = pd.DataFrame(data).drop_duplicates().dropna(subset=['candidate_events']).reset_index(drop=True)
+    out = pd.DataFrame(data).drop_duplicates().dropna(subset=['cluster']).reset_index(drop=True)
     return out
 
 
 def clusterevents(df):
     copy = df[['event_no', 'date_occurred', 'location', 'similar_locations',]].copy().drop_duplicates()
-    clusters = []
-    seen = set()
-    for tup in copy.itertuples():
-        eventno = tup.event_no
-        seen.add(eventno)
-        cands = copy.loc[~copy.event_no.isin(seen)].copy()
-        cands['similar'] = (
-            cands.date_occurred >= (tup.date_occurred - timedelta(minutes=10))) & (
-            cands.date_occurred <= (tup.date_occurred + timedelta(minutes=10))) & (
-            cands.similar_locations.str.contains(tup.location, regex=False))
-        found = cands.loc[cands.similar == True, 'event_no'].unique()
-        cluster = {eventno,}
-        seen.add(eventno)
-        for ea in found:
-            cluster.add(ea)
-            seen.add(ea)
-        clusters.append(cluster)
-    return clusters
+    cands = pd.merge(copy, copy.drop('similar_locations', axis=1),
+                     left_on='similar_locations', right_on='location',
+                     how='inner', suffixes=('1','2')).drop_duplicates()
+    pairs = cands.loc[(abs(cands.date_occurred1 - cands.date_occurred2) < timedelta(minutes=10)) &
+                      (cands.event_no1 != cands.event_no2)]
+    G = nx.from_pandas_edgelist(pairs, source='event_no1', target='event_no2')
+    cc = nx.connected_components(G)
+    return [set(ea) for ea in cc]
 # }}}
 
 # --- main --- {{{
@@ -109,11 +97,6 @@ if __name__ == '__main__':
     loc_clusterdf = format_locclusters(clusters=loc_clusters)
 
     events = pd.merge(data, loc_clusterdf, on='location', how='left')
-    # From review, the second row has a shorter list of similar locations
-    # The `location` string data has not been altered from the source material and sometimes has odd whitespace
-    events = events.drop_duplicates(subset='event_no')
-    assert not events.event_no.duplicated().any()
-    assert data.event_no.nunique() == events.event_no.nunique()
 
     logger.info('begin clustering event data')
     events.date_occurred = events.date_occurred.dt.floor('Min')
@@ -123,10 +106,13 @@ if __name__ == '__main__':
     event_clusterdf = format_eventclusters(clusters=event_clusters)
 
     logger.info('prepare and export data with new cluster fields')
-    events = pd.merge(events, event_clusterdf, on='event_no', how='left')
-    events['n_candidates'] = events.candidate_events.apply(
-        lambda x: len(x.split(' | ')) if pd.notna(x) else None)
-    events.to_parquet(args.output)
+    out = pd.merge(data, event_clusterdf, on='event_no', how='left')
+    out.loc[out.cluster.isna(), 'cluster'] = out.event_no
+
+    out['n_events'] = out.cluster.apply(
+        lambda x: len(x.split('|')) if pd.notna(x) else None)
+
+    out.to_parquet(args.output)
 
     logger.info('done')
 
