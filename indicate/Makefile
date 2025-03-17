@@ -5,6 +5,7 @@
 # Copyright:   2025, HRDAG, GPL v2 or later
 # =========================================
 
+cpd_sst := ../data/CPD_sst/export/output/cpd_sst.parquet
 input := ../match/output/events.parquet
 output := output/events.parquet
 
@@ -17,10 +18,12 @@ clean:
 
 $(output):\
 	src/indicate.py\
-	$(input)
+	$(input)\
+	$(cpd_sst)
 	-mkdir output
 	python $< \
 		--input=$(input)\
+		--cpd_sst=$(cpd_sst)\
 		--output=$@
 
 # done.

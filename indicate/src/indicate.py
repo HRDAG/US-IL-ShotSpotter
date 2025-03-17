@@ -19,9 +19,11 @@ import pandas as pd
 def getargs():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default=None)
+    parser.add_argument("--cpd_sst", default=None)
     parser.add_argument("--output", default=None)
     args = parser.parse_args()
     assert Path(args.input).exists()
+    assert Path(args.cpd_sst).exists()
     return args
 
 
@@ -46,14 +48,19 @@ if __name__ == '__main__':
     logger = getlogger(__name__, "output/indicate.log")
 
     data = pd.read_parquet(args.input)
+    cpd_sst = pd.read_parquet(args.cpd_sst, columns=[
+        'event_no', 'labeled_duplicate']).drop_duplicates()
+    data = pd.merge(data, cpd_sst, on='event_no', how='left')
     assert data.shape[0] > 200000
     data['year_occurred'] = data.date_occurred.dt.year
     data['dispatch_reported'] = data.date_dispatched.notna()
+    data['disposition_reported'] = data.disposition.notna()
     data['shotspotter_first'] = data.disposition.notna()
     data['misc_event'] = data.disposition.str.contains(
             "MISC.INC.", regex=False, flags=re.I)
     data['shotspotter_alert'] = data.event_type == 'ShotSpotter alert'
     data['human_caller'] = data.event_type == 'Human reporting gunfire'
+    data['any_coref'] = data.cluster != data.event_no
     data.to_parquet(args.output)
 
     logger.info('done')
